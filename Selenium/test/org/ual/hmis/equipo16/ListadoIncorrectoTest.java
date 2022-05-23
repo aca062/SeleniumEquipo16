@@ -32,6 +32,8 @@ public class ListadoIncorrectoTest {
 
 	@Before
 	public void setUp() {
+	    System.setProperty("webdriver.gecko.driver", "drivers/geckodriver.exe"); 
+	    System.setProperty("webdriver.chrome.driver", "drivers/chromedriver.exe"); 
 		driver = new ChromeDriver();
 		js = (JavascriptExecutor) driver;
 		vars = new HashMap<String, Object>();
@@ -50,6 +52,9 @@ public class ListadoIncorrectoTest {
 		driver.get("https://ecovivarenas.es/");
 		// 2 | setWindowSize | 1552x840 |
 		driver.manage().window().setSize(new Dimension(1552, 840));
+		if (!driver.findElements(By.id("btn-aceptar-cookies")).isEmpty()) {
+			driver.findElement(By.id("btn-aceptar-cookies")).click();
+		}
 		// 3 | click | linkText=Verduras |
 		driver.findElement(By.linkText("Verduras")).click();
 		// 4 | click | id=precioMenor |

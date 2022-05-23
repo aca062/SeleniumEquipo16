@@ -131,6 +131,6 @@ public class EliminarCorrectoTest {
 		// 39 | click | css=h2 |
 		driver.findElement(By.cssSelector("h2")).click();
 		// 40 | assertText | css=h2 | Correo o contraseña no válidos
-		assertThat(driver.findElement(By.cssSelector("h2")).getText(), is("Correo o contraseña no válidos"));
+		assertThat(driver.findElement(By.cssSelector("h2")).getText(), is("Correo o contrase�a no v�lidos"));
 	}
 }

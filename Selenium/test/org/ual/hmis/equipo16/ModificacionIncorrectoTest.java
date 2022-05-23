@@ -85,7 +85,7 @@ public class ModificacionIncorrectoTest {
 		// 17 | click | id=botonContrasena |
 		driver.findElement(By.id("botonContrasena")).click();
 		// 19 | assertAlert | Las dos contraseñas no coinciden |
-		assertThat(driver.switchTo().alert().getText(), is("Las dos contraseñas no coinciden"));
+		assertThat(driver.switchTo().alert().getText(), is("Las dos contrase�as no coinciden"));
 		// 20 | click | linkText=CERRAR SESIÓN |
 		driver.findElement(By.linkText("CERRAR SESIÓN")).click();
 	}

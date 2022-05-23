@@ -34,7 +34,7 @@ public class CreacionCorrectoTest {
 	public void setUp() {
 	    System.setProperty("webdriver.gecko.driver", "drivers/geckodriver.exe"); 
 	    System.setProperty("webdriver.chrome.driver", "drivers/chromedriver.exe"); 
-		driver = new ChromeDriver();
+		driver = new FirefoxDriver();
 		js = (JavascriptExecutor) driver;
 		vars = new HashMap<String, Object>();
 	}
@@ -87,11 +87,15 @@ public class CreacionCorrectoTest {
 		// 17 | click | id=enviar |
 		driver.findElement(By.id("enviar")).click();
 		// 18 | click | css=.mensajeConfirmacion |
-		driver.findElement(By.cssSelector(".mensajeConfirmacion")).click();
+		/*WebDriverWait wait = new WebDriverWait(driver,30);
+		WebElement selectMensaje = wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector(".mensajeConfirmacion")));
+		selectMensaje.click();*/
+		//driver.findElement(By.cssSelector(".mensajeConfirmacion")).click();
 		// 19 | verifyText | css=.mensajeConfirmacion | Se ha registrado
 		// correctamente\n\nVolver al inicio
-		assertThat(driver.findElement(By.cssSelector(".mensajeConfirmacion")).getText(),
-				is("Se ha registrado correctamente\\\\n\\\\nVolver al inicio"));
+		WebDriverWait wait = new WebDriverWait(driver,30);
+		WebElement selectMensaje = wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector(".mensajeConfirmacion")));
+		assertEquals(selectMensaje.getText(), "Se ha registrado correctamente\n\nVolver al inicio");
 		// 20 | click | css=.mensajeConfirmacion |
 		driver.findElement(By.cssSelector(".mensajeConfirmacion")).click();
 	}

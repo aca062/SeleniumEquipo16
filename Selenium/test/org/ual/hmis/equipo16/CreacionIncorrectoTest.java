@@ -96,6 +96,6 @@ public class CreacionIncorrectoTest {
 		// 21 | echo | ${message} |
 		System.out.println(vars.get("message").toString());
 		// 22 | assert | message | El correo debe ser válido
-		assertEquals(vars.get("message").toString(), "El correo debe ser válido");
+		assertEquals(vars.get("message").toString(), "El correo debe ser v�lido");
 	}
 }

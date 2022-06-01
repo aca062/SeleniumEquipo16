@@ -1,5 +1,7 @@
 package org.ual.hmis.equipo16;
 
+import static org.junit.Assert.fail;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -13,6 +15,8 @@ import org.openqa.selenium.Dimension;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -24,15 +28,54 @@ public class ListadoCorrectoTest {
 	JavascriptExecutor js;
 
 	@Before
-	public void setUp() {
-        //System.setProperty("webdriver.gecko.driver", "drivers/geckodriver.exe");
-        //System.setProperty("webdriver.chrome.driver", "drivers/chromedriver.exe");
-        FirefoxOptions firefoxOptions = new FirefoxOptions();
-        firefoxOptions.setHeadless(true);
-        driver = new FirefoxDriver(firefoxOptions);
-		js = (JavascriptExecutor) driver;
-		vars = new HashMap<String, Object>();
-	}
+    public void setUp() {
+
+        // Browser selector
+
+        int browser = -1; // 0: firefox, 1: chrome,...
+
+        if (System.getProperty("webdriver.gecko.driver") != null) {
+            browser = 0;
+        }else if (System.getProperty("webdriver.chrome.driver") != null) {
+            browser = 1;
+        }
+
+        Boolean headless = false;
+
+        switch (browser) {
+        case 0:  // firefox
+            // Firefox
+            // Descargar geckodriver de https://github.com/mozilla/geckodriver/releases
+            // Descomprimir el archivo geckodriver.exe en la carpeta drivers
+
+            //System.setProperty("webdriver.gecko.driver",  "drivers/geckodriver.exe");
+
+            FirefoxOptions firefoxOptions = new FirefoxOptions();
+            if (headless) firefoxOptions.setHeadless(headless);
+            driver = new FirefoxDriver(firefoxOptions);
+
+            break;
+        case 1: // chrome
+            // Chrome
+            // Descargar Chromedriver de https://chromedriver.chromium.org/downloads
+            // Descomprimir el archivo chromedriver.exe en la carpeta drivers
+
+            //System.setProperty("webdriver.chrome.driver", "drivers/chromedriver.exe");
+
+            ChromeOptions chromeOptions = new ChromeOptions();
+            if (headless) chromeOptions.setHeadless(headless);
+            chromeOptions.addArguments("window-size=1920,1080");
+            driver = new ChromeDriver(chromeOptions);
+
+            break;
+
+        default:
+            fail("Seleccione un navegador");
+            break;
+        }
+        js = (JavascriptExecutor) driver;
+        vars = new HashMap<String, Object>();
+    }
 
 	@After
 	public void tearDown() {

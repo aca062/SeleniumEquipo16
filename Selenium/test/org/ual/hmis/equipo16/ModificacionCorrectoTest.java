@@ -75,7 +75,7 @@ public class ModificacionCorrectoTest {
 		// 13 | assertText | css=p:nth-child(1) | Precio: 8 €/Kg
 		WebDriverWait wait1 = new WebDriverWait(driver,30);
         WebElement selectMensaje1 = wait1.until(ExpectedConditions.elementToBeClickable(By.cssSelector("p:nth-child(1)")));
-        assertEquals(selectMensaje1.getText(),"Precio: 4488 €/Kg");
+        assertEquals(selectMensaje1.getText(),"Precio: 8 €/Kg");
 		// 14 | click | linkText=ADMINISTRACIÓN |
 		driver.findElement(By.linkText("ADMINISTRACIÓN")).click();
 		// 15 | click | id=editarInventario |
@@ -91,6 +91,7 @@ public class ModificacionCorrectoTest {
 		// 19 | click | id=decimales |
 		driver.findElement(By.id("decimales")).click();
 		// 20 | type | id=decimales | 4
+		driver.findElement(By.id("decimales")).clear();
 		driver.findElement(By.id("decimales")).sendKeys("4");
 		// 21 | click | id=guardar |
 		driver.findElement(By.id("guardar")).click();
@@ -139,6 +140,7 @@ public class ModificacionCorrectoTest {
 		// 41 | click | css=.campos |
 		driver.findElement(By.cssSelector(".campos")).click();
 		// 42 | type | id=decimales | 8
+		driver.findElement(By.id("decimales")).clear();
 		driver.findElement(By.id("decimales")).sendKeys("8");
 		// 43 | click | id=guardar |
 		driver.findElement(By.id("guardar")).click();

@@ -40,7 +40,7 @@ public class CreacionCorrectoTest {
             browser = 1;
         }
 
-        Boolean headless = false;
+        Boolean headless = true;
 
         switch (browser) {
         case 0:  // firefox

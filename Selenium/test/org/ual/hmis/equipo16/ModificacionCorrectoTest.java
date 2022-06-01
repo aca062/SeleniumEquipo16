@@ -42,7 +42,7 @@ public class ModificacionCorrectoTest {
             browser = 1;
         }
 
-        Boolean headless = false;
+        Boolean headless = true;
 
         switch (browser) {
         case 0:  // firefox
@@ -167,6 +167,7 @@ public class ModificacionCorrectoTest {
 		// 32 | type | id=buscar | almendra
 		driver.findElement(By.id("buscar")).sendKeys("almendra");
 		// 33 | click | css=.producto:nth-child(5) > .datosProducto input:nth-child(1) |
+        wait1.until(ExpectedConditions.elementToBeClickable(By.cssSelector(".producto:nth-child(5)")));
 		driver.findElement(By.cssSelector(".producto:nth-child(5) > .datosProducto input:nth-child(1)")).click();
 		// 34 | click | css=p:nth-child(1) |
 		driver.findElement(By.cssSelector("p:nth-child(1)")).click();
@@ -181,6 +182,7 @@ public class ModificacionCorrectoTest {
 		// 39 | type | id=buscar | almendra
 		driver.findElement(By.id("buscar")).sendKeys("almendra");
 		// 40 | click | css=.producto:nth-child(5) > form > input:nth-child(2) |
+		wait1.until(ExpectedConditions.elementToBeClickable(By.cssSelector(".producto:nth-child(5)")));
 		driver.findElement(By.cssSelector(".producto:nth-child(5) > form > input:nth-child(2)")).click();
 		// 41 | click | css=.campos |
 		driver.findElement(By.cssSelector(".campos")).click();

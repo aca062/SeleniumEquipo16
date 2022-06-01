@@ -25,7 +25,7 @@ public class ListadoCorrectoTest {
 
 	@Before
 	public void setUp() {
-        System.setProperty("webdriver.gecko.driver", "drivers/geckodriver.exe");
+        //System.setProperty("webdriver.gecko.driver", "drivers/geckodriver.exe");
         //System.setProperty("webdriver.chrome.driver", "drivers/chromedriver.exe");
         FirefoxOptions firefoxOptions = new FirefoxOptions();
         firefoxOptions.setHeadless(true);

@@ -13,8 +13,8 @@ import org.openqa.selenium.Dimension;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -25,9 +25,11 @@ public class ListadoCorrectoTest {
 
 	@Before
 	public void setUp() {
-	    System.setProperty("webdriver.gecko.driver", "drivers/geckodriver.exe");
-	    System.setProperty("webdriver.chrome.driver", "drivers/chromedriver.exe");
-		driver = new ChromeDriver();
+        System.setProperty("webdriver.gecko.driver", "drivers/geckodriver.exe");
+        //System.setProperty("webdriver.chrome.driver", "drivers/chromedriver.exe");
+        FirefoxOptions firefoxOptions = new FirefoxOptions();
+        firefoxOptions.setHeadless(true);
+        driver = new FirefoxDriver(firefoxOptions);
 		js = (JavascriptExecutor) driver;
 		vars = new HashMap<String, Object>();
 	}
@@ -44,35 +46,15 @@ public class ListadoCorrectoTest {
 		// 1 | open | / |
 		driver.get("https://ecovivarenas.es/");
 		// 2 | setWindowSize | 1552x840 |
-		driver.manage().window().setSize(new Dimension(1552, 840));
+		driver.manage().window().setSize(new Dimension(1552, 1500));
 		if (!driver.findElements(By.id("btn-aceptar-cookies")).isEmpty()) {
 			driver.findElement(By.id("btn-aceptar-cookies")).click();
 		}
 		// 3 | click | linkText=Verduras |
 		driver.findElement(By.linkText("Verduras")).click();
-		// 4 | mouseDownAt | css=.producto:nth-child(1) > .datosProducto > form |
-		// 107.7750015258789,14.024993896484375
-        WebDriverWait wait1 = new WebDriverWait(driver,30);
+
+		WebDriverWait wait1 = new WebDriverWait(driver,30);
         WebElement selectMensaje1 = wait1.until(ExpectedConditions.elementToBeClickable(By.cssSelector(".producto:nth-child(1)")));
-		{
-			WebElement element = driver.findElement(By.cssSelector(".producto:nth-child(1) > .datosProducto > form"));
-			Actions builder = new Actions(driver);
-			builder.moveToElement(element).clickAndHold().perform();
-		}
-		// 5 | mouseMoveAt | css=.producto:nth-child(1) > .datosProducto > form |
-		// 107.7750015258789,14.024993896484375
-		{
-			WebElement element = driver.findElement(By.cssSelector(".producto:nth-child(1) > .datosProducto > form"));
-			Actions builder = new Actions(driver);
-			builder.moveToElement(element).perform();
-		}
-		// 6 | mouseUpAt | css=.producto:nth-child(1) > .datosProducto > form |
-		// 107.7750015258789,14.024993896484375
-		{
-			WebElement element = driver.findElement(By.cssSelector(".producto:nth-child(1) > .datosProducto > form"));
-			Actions builder = new Actions(driver);
-			builder.moveToElement(element).release().perform();
-		}
 		// 7 | click | css=.producto:nth-child(1) > .datosProducto |
 		driver.findElement(By.cssSelector(".producto:nth-child(1) > .datosProducto")).click();
 		// 8 | assertElementPresent | css=.producto:nth-child(1) > .datosProducto

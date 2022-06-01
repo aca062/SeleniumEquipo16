@@ -13,7 +13,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxOptions;
 
 public class CreacionIncorrectoTest {
 	private WebDriver driver;
@@ -22,9 +23,11 @@ public class CreacionIncorrectoTest {
 
 	@Before
 	public void setUp() {
-	    System.setProperty("webdriver.gecko.driver", "drivers/geckodriver.exe");
-	    System.setProperty("webdriver.chrome.driver", "drivers/chromedriver.exe");
-		driver = new ChromeDriver();
+        System.setProperty("webdriver.gecko.driver", "drivers/geckodriver.exe");
+        //System.setProperty("webdriver.chrome.driver", "drivers/chromedriver.exe");
+        FirefoxOptions firefoxOptions = new FirefoxOptions();
+        firefoxOptions.setHeadless(true);
+        driver = new FirefoxDriver(firefoxOptions);
 		js = (JavascriptExecutor) driver;
 		vars = new HashMap<String, Object>();
 	}
@@ -83,8 +86,6 @@ public class CreacionIncorrectoTest {
 		// 20 | executeScript | return
 		// document.getElementById("correo").validationMessage | message
 		vars.put("message", js.executeScript("return document.getElementById(\"correo\").validationMessage"));
-		// 21 | echo | ${message} |
-		System.out.println(vars.get("message").toString());
 		// 22 | assert | message | El correo debe ser válido
 		assertEquals(vars.get("message").toString(), "El correo debe ser válido");
 	}

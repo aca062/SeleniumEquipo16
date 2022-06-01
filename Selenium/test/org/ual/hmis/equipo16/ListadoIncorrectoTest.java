@@ -13,7 +13,8 @@ import org.openqa.selenium.Dimension;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxOptions;
 
 public class ListadoIncorrectoTest {
     private WebDriver driver;
@@ -23,8 +24,10 @@ public class ListadoIncorrectoTest {
     @Before
     public void setUp() {
         System.setProperty("webdriver.gecko.driver", "drivers/geckodriver.exe");
-        System.setProperty("webdriver.chrome.driver", "drivers/chromedriver.exe");
-        driver = new ChromeDriver();
+        //System.setProperty("webdriver.chrome.driver", "drivers/chromedriver.exe");
+        FirefoxOptions firefoxOptions = new FirefoxOptions();
+        firefoxOptions.setHeadless(true);
+        driver = new FirefoxDriver(firefoxOptions);
         js = (JavascriptExecutor) driver;
         vars = new HashMap<String, Object>();
     }

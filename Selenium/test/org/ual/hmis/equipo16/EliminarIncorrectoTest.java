@@ -16,7 +16,8 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -27,9 +28,11 @@ public class EliminarIncorrectoTest {
 
 	@Before
 	public void setUp() {
-	    System.setProperty("webdriver.gecko.driver", "drivers/geckodriver.exe");
-	    System.setProperty("webdriver.chrome.driver", "drivers/chromedriver.exe");
-		driver = new ChromeDriver();
+        System.setProperty("webdriver.gecko.driver", "drivers/geckodriver.exe");
+        //System.setProperty("webdriver.chrome.driver", "drivers/chromedriver.exe");
+        FirefoxOptions firefoxOptions = new FirefoxOptions();
+        firefoxOptions.setHeadless(true);
+        driver = new FirefoxDriver(firefoxOptions);
 		js = (JavascriptExecutor) driver;
 		vars = new HashMap<String, Object>();
 	}
@@ -103,6 +106,11 @@ public class EliminarIncorrectoTest {
     // 27 | sendKeys | id=inicio-contrasena | ${KEY_ENTER}
     driver.findElement(By.id("inicio-contrasena")).sendKeys(Keys.ENTER);
     // 28 | click | linkText=ADMINISTRACIÓN |
+    try {
+        Thread.sleep(1000);
+    } catch (InterruptedException e) {
+        e.printStackTrace();
+    }
     driver.findElement(By.linkText("ADMINISTRACIÓN")).click();
     // 29 | click | id=centroClientes |
     driver.findElement(By.id("centroClientes")).click();

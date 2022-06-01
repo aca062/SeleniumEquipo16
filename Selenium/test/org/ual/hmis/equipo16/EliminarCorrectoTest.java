@@ -1,8 +1,6 @@
 package org.ual.hmis.equipo16;
 
-import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertThat;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -111,6 +109,9 @@ public class EliminarCorrectoTest {
 		driver.findElement(By.id("centroClientes")).click();
 		// 31 | click | css=.cliente:last-child input:nth-child(2) |
 		driver.findElement(By.cssSelector(".cliente:last-child input:nth-child(2)")).click();
+		// Comprobación de que aparece una alarma y se cierra
+	    assertEquals(driver.switchTo().alert().getText(), "¿Seguro que quiere dar de baja esta cuenta?");
+	    driver.switchTo().alert().accept();
 		// 32 | click | linkText=CERRAR SESIÓN |
 		driver.findElement(By.linkText("CERRAR SESIÓN")).click();
 		// 33 | click | id=carrito |
@@ -128,6 +129,6 @@ public class EliminarCorrectoTest {
 		// 39 | click | css=h2 |
 		driver.findElement(By.cssSelector("h2")).click();
 		// 40 | assertText | css=h2 | Correo o contraseña no válidos
-		assertThat(driver.findElement(By.cssSelector("h2")).getText(), is("Correo o contrase�a no v�lidos"));
+		assertEquals(driver.findElement(By.cssSelector("h2")).getText(), "Correo o contraseña no válidos");
 	}
 }

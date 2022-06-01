@@ -15,6 +15,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class ListadoCorrectoTest {
 	private WebDriver driver;
@@ -50,11 +52,8 @@ public class ListadoCorrectoTest {
 		driver.findElement(By.linkText("Verduras")).click();
 		// 4 | mouseDownAt | css=.producto:nth-child(1) > .datosProducto > form |
 		// 107.7750015258789,14.024993896484375
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        WebDriverWait wait1 = new WebDriverWait(driver,30);
+        WebElement selectMensaje1 = wait1.until(ExpectedConditions.elementToBeClickable(By.cssSelector(".producto:nth-child(1)")));
 		{
 			WebElement element = driver.findElement(By.cssSelector(".producto:nth-child(1) > .datosProducto > form"));
 			Actions builder = new Actions(driver);

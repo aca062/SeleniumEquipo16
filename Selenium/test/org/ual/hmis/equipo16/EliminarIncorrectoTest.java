@@ -108,11 +108,13 @@ public class EliminarIncorrectoTest {
     driver.findElement(By.id("centroClientes")).click();
     // 31 | click | css=.cliente:last-child input:nth-child(2) |
     driver.findElement(By.cssSelector(".cliente:last-child input:nth-child(2)")).click();
+    assertEquals(driver.switchTo().alert().getText(), "¿Seguro que quiere dar de baja esta cuenta?");
+    driver.switchTo().alert().dismiss();
     // 32 | click | css=.cliente:last-child label:nth-child(3) |
     driver.findElement(By.cssSelector(".cliente:last-child label:nth-child(3)")).click();
     // 33 | assertElementPresent | xpath=//b[contains(.,'${emailrandom}')] |
     {
-      List<WebElement> elements = driver.findElements(By.xpath("//b[contains(.,\'vars.get('emailrandom').toString()\')]"));
+      List<WebElement> elements = driver.findElements(By.xpath("//*[contains(b,'" + vars.get("emailrandom").toString() + "')]"));
       assert(elements.size() > 0);
     }
     // 34 | click | linkText=CERRAR SESIÓN |

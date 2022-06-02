@@ -29,9 +29,11 @@ public class EliminarCorrectoTest {
 	JavascriptExecutor js;
 
 	@Before
-    public void setUp() {
+	public void setUp() {
 
         // Browser selector
+        //System.setProperty("webdriver.gecko.driver",  "drivers/geckodriver.exe");
+        //System.setProperty("webdriver.chrome.driver", "drivers/chromedriver.exe");
 
         int browser = -1; // 0: firefox, 1: chrome,...
 
@@ -45,11 +47,6 @@ public class EliminarCorrectoTest {
 
         switch (browser) {
         case 0:  // firefox
-            // Firefox
-            // Descargar geckodriver de https://github.com/mozilla/geckodriver/releases
-            // Descomprimir el archivo geckodriver.exe en la carpeta drivers
-
-            //System.setProperty("webdriver.gecko.driver",  "drivers/geckodriver.exe");
 
             FirefoxOptions firefoxOptions = new FirefoxOptions();
             if (headless) firefoxOptions.setHeadless(headless);
@@ -57,11 +54,6 @@ public class EliminarCorrectoTest {
 
             break;
         case 1: // chrome
-            // Chrome
-            // Descargar Chromedriver de https://chromedriver.chromium.org/downloads
-            // Descomprimir el archivo chromedriver.exe en la carpeta drivers
-
-            //System.setProperty("webdriver.chrome.driver", "drivers/chromedriver.exe");
 
             ChromeOptions chromeOptions = new ChromeOptions();
             if (headless) chromeOptions.setHeadless(headless);
